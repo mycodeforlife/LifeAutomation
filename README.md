@@ -49,13 +49,26 @@ python setup.py install
 After instalation make sure you create default schema and table for this code to work
 sql queries are available in ./financial/db/initial_schema.sql
 
-
 ----------------------------------------------------------------------------------
+
+How to setup REST Server: 
+
+> Step1: clone repositoy using git clone command. 
+> Step2: cd ./LifeAutomation/finance/src
+> Step3: chmod +x app.py 
+> Step4: ./app.py 
+
+How to test your server is up running? 
+
+> Step1: Go to browser 
+> Step2: Type URL http://localhost:5000/ in address bar
+> Step3: You should see output in browser Welcome to financial automation ! 
+
+
 ----------------------------------------------------------------------------------
 REST API Docs
 Version: 1.0 
 Edited Date: Dec 1st 2016
-----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 
 Get most recnent stock price: 
