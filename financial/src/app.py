@@ -5,14 +5,14 @@ from yahoo_finance import Share
 from StockAnalysis import * 
 from FavoriteStock import *
 from flask import request
-from flask_httpauth import HTTPBasicAuth
+#from flask_httpauth import HTTPBasicAuth
 
 
 app = Flask(__name__)
 quote = Share('YHOO') 
 
 
-
+'''
 auth = HTTPBasicAuth()
 @auth.get_password
 def get_password(username):
@@ -23,7 +23,7 @@ def get_password(username):
 @auth.error_handler
 def unauthorized():
     return make_response(jsonify({'error': 'Unauthorized access'}), 401)
-
+'''
 
 @app.route('/')
 def index():
