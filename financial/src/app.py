@@ -5,16 +5,32 @@ from yahoo_finance import Share
 from StockAnalysis import * 
 from FavoriteStock import *
 from flask import request
+from flask_httpauth import HTTPBasicAuth
 
 
 app = Flask(__name__)
 quote = Share('YHOO') 
+
+
+
+auth = HTTPBasicAuth()
+@auth.get_password
+def get_password(username):
+    if username == 'miguel':
+        return 'python'
+    return None
+
+@auth.error_handler
+def unauthorized():
+    return make_response(jsonify({'error': 'Unauthorized access'}), 401)
+
 
 @app.route('/')
 def index():
     return "Welcome to financial automation !"
 
 @app.route('/stockautomation/api/v1.0/getquote/<stockcode>',methods=['GET'])
+# @auth.login_required
 def get_quote(stockcode):
 	myStockAnalysis = StockAnalysis(stockcode)
 	data = myStockAnalysis.getStockPriceInfo(stockcode)
@@ -64,5 +80,5 @@ def get_fav_stock():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8081, debug=True)
 
