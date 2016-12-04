@@ -122,5 +122,27 @@ JSON RESPONSE:
   "Unit": "%"
 }
 
+----------------------------------------------------------------------------------
+
+Adding specific stock as favirote stock: 
+http://localhost:<port>/stockautomation/api/v1.0/favorite/
+METHOD: POST
+PAY LOAD: 
+{
+	"Symbol":"<STOCK SYMBOL>"
+}
+
+Example: 
+http://localhost:<port>/stockautomation/api/v1.0/favorite/
+
+PAY LOAD: 
+{
+	"Symbol":"CTL"
+}
+
+Response Code: 
+201 CREATE
+Body: 
+CTL
 
 ##########################################################################################################
