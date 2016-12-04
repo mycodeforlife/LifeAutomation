@@ -5,10 +5,13 @@ from yahoo_finance import Share
 from StockAnalysis import * 
 from FavoriteStock import *
 from flask import request
+from flask_cors import CORS
+
 #from flask_httpauth import HTTPBasicAuth
 
 
 app = Flask(__name__)
+CORS(app)
 quote = Share('YHOO') 
 
 
@@ -44,7 +47,7 @@ def get_historic_low(stockcode):
 	return jsonify(data)
 
 @app.route('/stockautomation/api/v1.0/getdividenddates/<stockcode>',methods=['GET'])
-def get_dividend_details(stockcode):
+def get_dividend_date_details(stockcode):
 	myStockAnalysis = StockAnalysis(stockcode)
 	data = myStockAnalysis.getExDividedDate(stockcode)
 	return jsonify(data)
@@ -55,7 +58,20 @@ def get_dividend_yield_info(stockcode):
 	data = myStockAnalysis.getDividendYieldInfo(stockcode)
 	return jsonify(data)
 
-@app.route('/stockautomation/api/v1.0/favorite/',methods=['POST'])
+@app.route('/stockautomation/api/v1.0/getpayoutratio/<stockcode>',methods=['GET'])
+def get_pay_out_ratio_info(stockcode):
+        myStockAnalysis = StockAnalysis(stockcode)
+        data = myStockAnalysis.getPayOurRatio(stockcode)
+        return jsonify(data)
+
+@app.route('/stockautomation/api/v1.0/getdividenddetails/<stockcode>',methods=['GET'])
+def get_dividend_details(stockcode):
+        myStockAnalysis = StockAnalysis(stockcode)
+        data = myStockAnalysis.getDeividendDetails(stockcode)
+        return jsonify(data)
+
+
+@app.route('/stockautomation/api/v1.0/favorite',methods=['POST'])
 def add_to_favorite_stock():
 	if not 'Symbol' in request.json:
 		return "symbol not there in post body"
