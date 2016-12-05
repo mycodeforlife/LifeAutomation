@@ -21,30 +21,31 @@ class StockAnalysis:
 
 	def getDividendYieldInfo(self,symbol):
 		quote = Share(symbol)
-		#dividend_yield = quote.get_dividend_yield()
-		dividend_yield = quote.get_dividend_share()
+		dividend_yield = quote.get_dividend_yield()
 		dividend_info = {'Symbol':symbol,'DividendYield':dividend_yield,'Unit':'%'}
 		return dividend_info
 
 	def getPayOurRatio(self,symbol):
 		quote = Share(symbol)
-                dividend_per_share = quote.get_dividend_share()
-                EPS_current_year = quote.get_EPS_estimate_current_year()
+		dividend_per_share = quote.get_dividend_share()
+		EPS_current_year = quote.get_EPS_estimate_current_year()
 		pay_out_ratio = (float(dividend_per_share) / float(EPS_current_year))*100
 		pay_out_ratio =  float("{0:.2f}".format(pay_out_ratio))
-                pay_out_info = {'Symbol':symbol,'PayOut Ratio':pay_out_ratio, "Unit":"%" }
-                return pay_out_info
+		pay_out_info = {'Symbol':symbol,'PayOut Ratio':pay_out_ratio, "Unit":"%" }
+		return pay_out_info
 
 	def getDeividendDetails(self,symbol):
 		quote = Share(symbol)
 		dividend_per_share = quote.get_dividend_share()
-                EPS_current_year = quote.get_EPS_estimate_current_year()
-                pay_out_ratio = (float(dividend_per_share) / float(EPS_current_year))*100
-                pay_out_ratio =  float("{0:.2f}".format(pay_out_ratio))
-                dividend_info = {'Symbol':symbol, 'Divided Per Share':dividend_per_share, 'EPS Current Year Estimation': EPS_current_year, 'PayOut Ratio':pay_out_ratio, "Unit":"%"}
-                return dividend_info
-
-		
+		EPS_current_year = quote.get_EPS_estimate_current_year()
+		pay_out_ratio = (float(dividend_per_share) / float(EPS_current_year))*100
+		pay_out_ratio =  str(float("{0:.2f}".format(pay_out_ratio)))+"%"
+		hold_date = quote.get_ex_dividend_date()
+		payout_date = quote.get_dividend_pay_date()
+		dividend_yield = quote.get_dividend_yield()+"%"
+		dividend_info = {'Symbol':symbol, 'DividedPerShare':dividend_per_share, 'EPSCurrentYearEstimation': EPS_current_year, 'PayOutRatio':pay_out_ratio,'ExDividedDate':hold_date,'LastPayoutDate':payout_date,'DividendYield':dividend_yield}
+		return dividend_info
+	
 	def getExDividedDate(self,symbol):
 		quote = Share(symbol)
 		hold_date = quote.get_ex_dividend_date()
@@ -54,6 +55,7 @@ class StockAnalysis:
 		
 	def isDividedRateHealthy(self):
 		pass
+
 	def getDividendDateDetails(self):
 		pass
 	def getNumberOfOutStandingShares(self,symbol):
