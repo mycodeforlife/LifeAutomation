@@ -30,7 +30,7 @@ def unauthorized():
 
 @app.route('/')
 def index():
-    return "Welcome to financial automation !"
+    return "Welcome to stock analytics application!"
 
 @app.route('/stockautomation/api/v1.0/getquote/<stockcode>',methods=['GET'])
 # @auth.login_required
@@ -45,6 +45,7 @@ def get_historic_low(stockcode):
 	myStockAnalysis = StockAnalysis(stockcode)
 	data = myStockAnalysis.getNumberOfOutStandingShares(stockcode)
 	return jsonify(data)
+
 
 @app.route('/stockautomation/api/v1.0/getdividenddates/<stockcode>',methods=['GET'])
 def get_dividend_date_details(stockcode):
