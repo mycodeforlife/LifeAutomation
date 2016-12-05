@@ -4,18 +4,38 @@
 		<title>Welcome to Stock analyzer</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     	<script src="dividend_details.js"></script>
+    	<link rel="stylesheet" type="text/css" href="table.css"/>
 	</head>
 
 	<body>
+
+
+
 		<div ng-controller="quote">
 			Stock Symbol: <input type="text" name="stock_symbol" ng-model="stock_symbol" required />
    			<button ng-click="getDividendInformation()">StockDetails</button>
-			<p>Stock Symbol: {{stock_quote.Symbol}}</p>
-			<p>PayOut Ratio: {{stock_quote.PayOutRatio}}</p>
-			<p>Dividend Yield: {{stock_quote.DividendYield}}</p>
-			<p>Divided Per Share: {{stock_quote.DividedPerShare}}</p>
-			<p>Ex Divided Date: {{stock_quote.ExDividedDate}}</p>
-			<p>Last Payout Date: {{stock_quote.LastPayoutDate}}</p>
+   			<br>
+   			<br>
+			<table class="hoverTable">
+				<tr>
+					<td>Stock Symbol</td><td>{{stock_quote.Symbol}}</td>
+				</tr>
+				<tr>
+					<td>PayOut Ratio</td><td>{{stock_quote.PayOutRatio}}</td>
+				</tr>
+				<tr>
+					<td>Dividend Yield</td><td>{{stock_quote.DividendYield}}</td>
+				</tr>
+				<tr>
+					<td>Divided Per Share</td><td>{{stock_quote.DividedPerShare}}</td>
+				</tr>
+				<tr>
+					<td>Ex Divided Date</td><td>{{stock_quote.ExDividedDate}}</td>
+				</tr>
+				<tr>
+					<td>Last Payout Date</td><td>{{stock_quote.LastPayoutDate}}</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>
