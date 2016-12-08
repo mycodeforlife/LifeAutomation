@@ -6,14 +6,13 @@ from StockAnalysis import *
 from FavoriteStock import *
 from flask import request
 from flask_cors import CORS
+from NewsFeeds import NewsFeedsFromSeekingAlpha
 
 #from flask_httpauth import HTTPBasicAuth
 
 
 app = Flask(__name__)
 CORS(app)
-quote = Share('YHOO') 
-
 
 '''
 auth = HTTPBasicAuth()
@@ -72,7 +71,7 @@ def get_dividend_details(stockcode):
         return jsonify(data)
 
 
-@app.route('/stockautomation/api/v1.0/favorite',methods=['POST'])
+@app.route('/stockautomation/api/v1.0/favorite/',methods=['POST'])
 def add_to_favorite_stock():
 	if not 'Symbol' in request.json:
 		return "symbol not there in post body"
@@ -85,8 +84,8 @@ def add_to_favorite_stock():
 
 @app.route('/stockautomation/api/v1.0/getfavstock/',methods=['GET'])
 def get_fav_stock():
-        myFavStock = FavoriteStock()
-        data = myFavStock.getFavoriteStockList()
+	myFavStock = FavoriteStock()
+	data = myFavStock.getFavoriteStockList()
 	fav_list = []
 	for i in data: 
 		tmp={}
@@ -94,6 +93,13 @@ def get_fav_stock():
 		fav_list.append(tmp)
 
 	return jsonify(fav_list)
+
+@app.route('/stockautomation/api/v1.0/getnews/<stockcode>',methods=['GET'])
+def get_news_about_stock(stockcode):
+	news=NewsFeedsFromSeekingAlpha(stockcode)
+	news_update = news.getNewsInJSONFormat()
+
+	return news_update
 
 
 if __name__ == '__main__':
