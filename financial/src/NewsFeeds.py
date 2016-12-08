@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import xml.etree.ElementTree as ET
 import requests
+import json
 
 class NewsFeedsFromSeekingAlpha:
 	
@@ -39,5 +40,5 @@ class NewsFeedsFromSeekingAlpha:
 		self.news_response_json=self.news_response_json+"]"
 
 	def getNewsInJSONFormat(self):
-		return self.news_response_json
+		return json.loads(self.news_response_json)
 	
