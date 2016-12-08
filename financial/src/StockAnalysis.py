@@ -38,19 +38,20 @@ class StockAnalysis:
 		quote = Share(symbol)
 		dividend_per_share = quote.get_dividend_share()
 		EPS_current_year = quote.get_EPS_estimate_current_year()
-
 		dividend_yield = quote.get_dividend_yield()
+		hold_date = quote.get_ex_dividend_date()
+		payout_date = quote.get_dividend_pay_date()
 
 		print dividend_per_share
 		print EPS_current_year
 		if dividend_per_share is None:
 			dividend_per_share = "0"
 			dividend_yield = "0%"
+			payout_date = "None"
+			hold_date = "None"
 		pay_out_ratio = (float(dividend_per_share) / float(EPS_current_year))*100
 		pay_out_ratio =  str(float("{0:.2f}".format(pay_out_ratio)))+"%"
-		hold_date = quote.get_ex_dividend_date()
-		payout_date = quote.get_dividend_pay_date()
-
+		
 		dividend_info = {'Symbol':symbol, 'DividedPerShare':dividend_per_share, 'EPSCurrentYearEstimation': EPS_current_year, 'PayOutRatio':pay_out_ratio,'ExDividedDate':hold_date,'LastPayoutDate':payout_date,'DividendYield':dividend_yield}
 		return dividend_info
 	
