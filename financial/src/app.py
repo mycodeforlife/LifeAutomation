@@ -99,7 +99,7 @@ def get_news_about_stock(stockcode):
 	news=NewsFeedsFromSeekingAlpha(stockcode)
 	news_update = news.getNewsInJSONFormat()
 
-	return news_update
+	return jsonify(news_update)
 
 
 if __name__ == '__main__':
