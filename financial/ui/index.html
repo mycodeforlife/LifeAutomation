@@ -3,19 +3,17 @@
 	<head>
 		<title>Welcome to Stock analyzer</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	<script src="dividend_details.js"></script>
+    	<script src="StockDetails_get.js"></script>
     	<link rel="stylesheet" type="text/css" href="table.css"/>
 	</head>
-
 	<body>
-
-
-
-		<div ng-controller="quote">
+		<div class='container' ng-controller="quote">
 			Stock Symbol: <input type="text" name="stock_symbol" ng-model="stock_symbol" required />
    			<button ng-click="getDividendInformation()">StockDetails</button>
    			<br>
    			<br>
+   			<br>
+   			<div id="first">
 			<table class="hoverTable">
 				<tr>
 					<td>Stock Symbol</td><td>{{stock_quote.Symbol}}</td>
@@ -36,7 +34,15 @@
 					<td>Last Payout Date</td><td>{{stock_quote.LastPayoutDate}}</td>
 				</tr>
 			</table>
+			</div >
+			<div id="second">
+			<div ng-repeat="news in related">
+				<a href="{{news.url}}"" target="_blank">{{news.title}}</a>
+			</div>
+			</div>
 		</div>
+
+
 	</body>
 </html>
 
