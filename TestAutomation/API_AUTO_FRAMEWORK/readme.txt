@@ -30,4 +30,21 @@ update the port information example: 8080 or 443
 ------------------------------------
 | Preperation of input file as csv |
 ------------------------------------
+ 
+sample input data should in saved in .csv file: 
+
+Example: stock_api.csv
+
+testcase_id,base_url,symbol,response_code
+1,stockautomation/api/v1.0/getquote/,CTL,200
+
+dataParser class will help you to parse this data file and gives you back the test data 
+
+---------------------------------------
+| Preperation of test automation file |
+---------------------------------------
+
+Example test automation file is available at test_get_stock_details_api.py
+For now get method call is available without authentication 
+
 
