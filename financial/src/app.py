@@ -4,6 +4,7 @@ from flask import Flask, jsonify, json
 from yahoo_finance import Share
 from StockAnalysis import * 
 from FavoriteStock import *
+from StockExchanges import *
 from flask import request
 from flask_cors import CORS
 from NewsFeeds import NewsFeedsFromSeekingAlpha
@@ -37,6 +38,14 @@ def get_quote(stockcode):
 	myStockAnalysis = StockAnalysis(stockcode)
 	data = myStockAnalysis.getStockPriceInfo(stockcode)
 	return jsonify(data)
+
+@app.route('/stockautomation/api/v1.0/getstockexchanges/',methods=['GET'])
+def get_stock_exchange():
+	stockExchange = StockExchanges()
+	exchange_map = stockExchange.getListOfExchanges()
+	for i in exchange_map.keys():
+		print i
+	return jsonify(exchange_map)
 	
 
 @app.route('/stockautomation/api/v1.0/getnumoutstandingshares/<stockcode>',methods=['GET'])
@@ -79,7 +88,7 @@ def add_to_favorite_stock():
 		stockcode = request.json["Symbol"]
 		favStock = FavoriteStock();
 		favStock.addFavoriteStock(stockcode,"NYSE")
-	return stockcode,201
+	return stockcode,200
  
 
 @app.route('/stockautomation/api/v1.0/getfavstock/',methods=['GET'])

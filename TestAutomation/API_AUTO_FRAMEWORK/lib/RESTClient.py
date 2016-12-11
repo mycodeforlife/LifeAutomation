@@ -38,11 +38,16 @@ class RESTClient:
 		def makeGETRequest(self,url,data,auth_token):
 			req_url = self.url+url
 			self.content_headers = {'accept':'application/json','Content-type':'application/json'}
-			self.content_headers['fpc-sid'] = str(auth_token)
+			if not (auth_token is None):
+				self.content_headers['fpc-sid'] = str(auth_token)
+				self.s.headers.update(self.content_headers)
+			
+			print "-----------------------------------------------------------"
 			print "Request URL: "+req_url
 			print "Method: GET"
 			print "Request Header: "+str(self.content_headers)
-			self.s.headers.update(self.content_headers)
+			print "-----------------------------------------------------------"
+			
 			response_json = self.s.get(req_url,verify=False)
 			return response_json
 
