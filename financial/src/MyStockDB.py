@@ -12,6 +12,17 @@ class MyStockDB:
 		cur.execute(save_fav_stock_query)
 		self.db.commit()
 
+	def get_stock_exchange(self):
+		cur = self.db.cursor()
+		cur.execute("SELECT ExchangeSymbol,ExchangeName	 FROM mystockdb.ExchangeSymbol")
+		tmp = cur.fetchall()
+		exchange_map = {}
+		for i in tmp: 
+			exchange_map[i[0]]=i[1]
+		return exchange_map
+
+
+
 	def get_fav_stock_list(self):
 		cur = self.db.cursor()
 		cur.execute("SELECT Symbol FROM mystockdb.fav_stock")
