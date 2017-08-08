@@ -28,10 +28,10 @@ $ sudo pip install yahoo-finance
 How to check if you have right version of yahoo-finance module? 
 
 ---------------------------------
-#! /usr/bin/pyhon 
 
 import yahoo_finance
 print yahoo_finance.__version__
+
 ---------------------------------
 
 execute above  program, output should show version number as 1.4.0 
